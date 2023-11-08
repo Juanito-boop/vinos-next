@@ -1,52 +1,95 @@
-import { supabase } from "@/app/supabase"
+import { supabase } from "@/app/supabase";
 import Image from "next/image";
+import Slider from "react-slick";
+// import Database from "@/app/ui/models/supabase";
 
+// Función principal para renderizar las tarjetas de vinos
 export default async function CardsMain() {
   try {
-    let { data: vinos, error: errorVinos } = await supabase
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
+    // Traer la data de los vinos desde la base de datos usando el cliente de Supabase
+    const { data: vinos, error: errorVinos } = await supabase
       .from('vinos')
-      .select(`id, nombre, precio, id_unica, url_imagen, variedades(variedad), paises(pais)`)
-      .limit(4)
+      .select(`id, nombre, precio, variedad, id_unica, url_imagen, variedades(variedad), paises(pais)`);
 
-    let { data: variedades, error: errorVariedades } = await supabase
+    // Traer la data de las variedades desde la base de datos usando el cliente de Supabase
+    const { data: variedades, error: errorVariedades } = await supabase
       .from('variedades')
-      .select(`id,variedad`)
+      .select(`id,variedad`);
 
-    if (errorVinos || errorVariedades) throw errorVinos || errorVariedades;
+    // Si hay algún error en la obtención de los datos, se lanza una excepción
+    if (errorVinos || errorVariedades) {
+      throw errorVinos || errorVariedades;
+    }
+    
+    // Agrupar los vinos por su variedad
+    const vinosPorVariedad = vinos.reduce((acc: { [key: string]: any; }, vino: { variedad: string; }) => {
+      const variedadId = vino.variedad;
+      if (!acc[variedadId]) {
+        acc[variedadId] = [];
+      }
+      acc[variedadId].push(vino);
+      return acc;
+    }, {});
 
-    // console.log(JSON.stringify(vinos, null, 2))
+    
+    // Función para renderizar los vinos
+    const renderVinos = (vinos: any[]) => {
+
+      return vinos?.map((vino: any) => (
+        // Crear una tarjeta para cada vino
+        <div className="rounded-t-[10px] group-[transition-transform transform hover:translate-z-2 hover:scale-105 hover:shadow-xl hover:duration-hover:ease-in-out] max-w-[260px] ml-1 scroll-snap-align-start z-10 mx-2.5" key={vino.nombre - vino.variedades.variedad}>
+          <Image
+            className="my-2 rounded-[10px]"
+            src={vino.url_imagen}
+            alt={vino.nombre}
+            width={250}
+            height={250}
+          />
+          <div className="p-4 border-2 border-principalColor1 rounded-b-[10px]">
+            <span className="mb-2 text-[0.9em] font-poppins text-principalColor1 font-semibold">
+              {vino.nombre}
+            </span>
+            <p className="mb-2 text-[0.9em] font-poppins text-principalColor1">{vino.variedades.variedad}</p>
+            <div className="flex items-center justify-between">
+              <p className="mr-0 font-semibold font-poppins text-principalColor1 text-[0.9em]">${vino.precio} COP</p>
+              <a href="/info/" className="px-2 py-1 text-xs font-semibold uppercase transition-all duration-150 ease-linear border rounded-lg outline-none text-emerald-500 background-transparent focus:outline-none border-emerald-500">INFORMACIÓN</a>
+            </div>
+          </div>
+        </div>
+      ));
+    };
+
+    // Renderizar la sección principal con las tarjetas de vinos
     return (
       <>
-        <main className="w-full bg-normalColor11 rounded-xl px-1 pb-1 pt-3">
-          <section className="mx-[5px] pb-[3%] items-center overflow-x-auto-scroll-m-0 scroll-smooth scroll-snap-x-mandatory cont" id="">
-            <div className="grid grid-flow-col px-2 [&>div]:hover:backdrop:blur justify-around">
-              {vinos?.map((vino: any) => (
-                <div className="rounded-t-[10px] group-[transition-transform transform hover:translate-z-2 hover:scale-105 hover:shadow-xl hover:duration-hover:ease-in-out] max-w-[260px] ml-1 scroll-snap-align-start z-10 mx-2.5" key={vino.id_unica}>
-                  <Image
-                    className="my-2 rounded-[10px]"
-                    src={vino.url_imagen}
-                    alt={vino.nombre}
-                    width={250}
-                    height={250}
-                  />
-                  <div className="p-4 border-2 border-[#efb810] rounded-b-[10px]">
-                    <span className="mb-2 text-[0.9em] font-poppins text-principalColor1 font-semibold">
-                      {vino.nombre}
-                    </span>
-                    <p className="mb-2 text-[0.9em] font-poppins text-principalColor1">{vino.variedades.variedad}</p>
-                    <div className="flex items-center justify-between">
-                      <p className="mr-0 font-semibold font-poppins text-principalColor1 text-[0.9em]">${vino.precio} COP</p>
-                      <a href="/info/" className="text-emerald-500 background-transparent font-semibold uppercase py-1 px-2 outline-none focus:outline-none ease-linear transition-all duration-150 border border-emerald-500 rounded-lg text-xs">INFORMACIÓN</a>
-                    </div>
-                  </div>
+        <main className="w-full px-1 pt-3 pb-1 bg-normalColor11 rounded-xl">
+          {Object.keys(vinosPorVariedad).map((variedadId) => {
+            const vinos = vinosPorVariedad[variedadId];
+            const vari = variedades?.find((variedad: { variedad: string }) => {
+              return variedad.variedad === vinos[0].variedades.variedad;
+            });
+            console.log(vari);
+            return (
+              <section className="mx-[5px] pb-[3%] items-center overflow-x-auto-scroll-m-0 scroll-smooth scroll-snap-x-mandatory cont">
+                <h2 className="my-3 flex items-center justify-center font-poppins text-[2em] font-bold leading-10 text-principalColor1 uppercase">{vari?.variedad}</h2>
+                <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 px-2 [&>div]:hover:backdrop:blur justify-around">
+                  {renderVinos(vinos)}
                 </div>
-              ))}
-            </div>
-          </section>
+              </section>
+            );
+          })}
         </main>
       </>
-    )
+    );
   } catch (error) {
-    console.error('Error fetching data:', error)
+    // En caso de error, se imprime en la consola
+    console.error('Error fetching data:', error);
   }
 }
