@@ -16,3 +16,11 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* body {
+  background: rgb(99, 21, 92)
+} */
