@@ -1,13 +1,13 @@
 import '@/app/ui/global.css'
 
 export default function RootLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <body className="bg-principalColor2 pb-2.5">{children}</body>
-    </html>
-  );
+	return (
+		<html lang="en">
+			<body className="bg-principalColor2 pb-2.5">{children}</body>
+		</html>
+	);
 }

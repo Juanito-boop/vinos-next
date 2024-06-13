@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation';
 
 export default function HomeRedirect() {
-  return(
-    redirect('/home')
-  )
+	return(
+		redirect('/home')
+	)
 }
