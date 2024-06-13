@@ -18,7 +18,7 @@ export default function Carousel({
     <>
       <div className="flex gap-1">
         <button
-          className="px-1 py-4 mx-auto my-auto border rounded-full bg-white/80 border-principalColor1"
+          className="px-1 py-4 m-auto border rounded-full bg-white/80 border-principalColor1"
           onClick={onPrevPage}
           children="←"
         />
@@ -62,7 +62,7 @@ export default function Carousel({
           ))}
         </div>
         <button
-          className="px-1 py-4 mx-auto my-auto border rounded-full bg-white/80 border-principalColor1"
+          className="px-1 py-4 m-auto border rounded-full bg-white/80 border-principalColor1"
           onClick={onNextPage}
           children="→"
         />
