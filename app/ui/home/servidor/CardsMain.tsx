@@ -42,7 +42,7 @@ export default async function CardsMain() {
     const vinosPorVariedad = groupVinosByVariedad(vinos);
 
     return (
-      <main className="w-full px-1 pt-3 pb-1 bg-normalColor11 rounded-xl">
+      <main className="w-full px-1 pt-3 pb-1 bg-normalColor11 rounded-r-xl">
         {Object.keys(vinosPorVariedad).map((variedadId) => {
           const vinos = vinosPorVariedad[variedadId];
           const variedad = variedades.find(
