@@ -46,7 +46,7 @@ export default async function AsideMain() {
     const { variedades, paises } = await fetchData();
 
     return (
-      <aside className="flex flex-col max-w-[20%] min-w-[15%] rounded-b-xl bg-normalColor11 rounded-xl">
+      <aside className="flex flex-col max-w-[20%] min-w-[15%] rounded-l-xl bg-normalColor11">
         <span
           className={`${poppins.className} flex items-center justify-center text-[1.5em] font-bold text-principalColor1 bg-normalColor11 rounded-t-xl px-5 py-2`}
           children="FILTROS"
