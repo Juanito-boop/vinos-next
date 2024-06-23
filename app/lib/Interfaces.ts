@@ -20,6 +20,31 @@ export interface Paises {
 	pais: string;
 }
 
+// otras interfaces
+export interface AsideProps {
+	variedades: Variedades[];
+	paises: Paises[];
+}
+
+export interface CarouselProps {
+	vinos: Vinos[];
+	page: number;
+	itemsPerPage: number;
+	onNextPage: () => void;
+	onPrevPage: () => void;
+}
+
+export interface CarouselSectionProps {
+	vinos: Vinos[];
+	variedad: string;
+}
+
+export interface PaginationDotsProps {
+	currentPage: number;
+	totalPages: number;
+	onPageClick: (index: number) => void;
+}
+
 export interface Country {
 	pais: string;
 }
@@ -28,22 +53,10 @@ export interface Variety {
 	variedad: string;
 }
 
-// otras interfaces
-export interface CarouselProps {
-  vinos: Vinos[];
-  page: number;
-  itemsPerPage: number;
-  onNextPage: () => void;
-  onPrevPage: () => void;
-}
-
-export interface CarouselSectionProps {
-  vinos: Vinos[];
-  variedad: string;
-}
-
-export interface PaginationDotsProps {
-  currentPage: number;
-  totalPages: number;
-  onPageClick: (index: number) => void;
+export interface CartItem {
+	productId: number;
+	nombre: string;
+	quantity: number;
+	price: number;
+	timestamp?: number; // Agregar timestamp opcional
 }
