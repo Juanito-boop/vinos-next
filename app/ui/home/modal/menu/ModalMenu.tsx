@@ -7,25 +7,11 @@ import {
   userLogInMagicLinkViaEmail,
   userSignUp,
 } from "./funcionesServidor";
+import EmailPasswordForm from "./forms/emailPassword";
+import MagicLinkForm from "./forms/magicLink";
+import SignUpForm from "./forms/signUp";
 
 type FormType = "email" | "magicLink" | "sign up";
-
-async function handleSignUp(
-  emailOptionSignUp: string,
-  passwordOptionSignUp: string
-) {
-  try {
-    const response = await userSignUp(emailOptionSignUp, passwordOptionSignUp);
-    const { signUpData } = response;
-    return signUpData;
-    // Ahora puedes usar signUpData aquí
-  } catch (error) {
-    // Manejar el error aquí
-    console.error("Error during sign up:", error);
-  }
-}
-
-async function handleUserLogInEmailPassword() {}
 
 export default function ModalMenu({ isModalOpen, setIsModalOpen }: ModalMenu) {
   if (!isModalOpen) return null;
@@ -75,150 +61,33 @@ export default function ModalMenu({ isModalOpen, setIsModalOpen }: ModalMenu) {
           <div className="grid grid-cols-2 gap-3 px-4">
             <button
               className="p-2 text-center text-black border border-black rounded-lg col-start-1"
+              children="Email"
               onClick={() => renderForm("email")}
-            >
-              Email
-            </button>
+            />
             <button
               className="p-2 text-center text-black border border-black rounded-lg col-start-2"
+              children="Magic Link"
               onClick={() => renderForm("magicLink")}
-            >
-              Magic Link
-            </button>
+            />
           </div>
         </div>
       </>
     );
   }
 
+  const FORM_COMPONENTS: Record<FormType, React.ElementType> = {
+    email: EmailPasswordForm,
+    magicLink: MagicLinkForm,
+    "sign up": SignUpForm,
+  };
+
+  function ModalContent({ formOption }: { formOption: FormType }) {
+    const FormComponent = FORM_COMPONENTS[formOption];
+    return FormComponent ? <FormComponent /> : null;
+  }
+
   function renderModalForms(formOption: FormType) {
-    const [emailOptionEmail, setEmailOptionEmail] = useState<string>("");
-    const [passwordOptionEmail, setPasswordOptionEmail] = useState<string>("");
-    const [emailOptionMagicLink, setEmailOptionMagicLink] =
-      useState<string>("");
-    const [emailOptionSignUp, setEmailOptionSignUp] = useState<string>("");
-    const [passwordOptionSignUp, setPasswordOptionSignUp] =
-      useState<string>("");
-
-    const signUpData = handleSignUp(emailOptionSignUp, passwordOptionSignUp);
-    const {} = userLogInEmailPassword(emailOptionEmail, passwordOptionEmail);
-    const {} = userLogInMagicLinkViaEmail(emailOptionMagicLink);
-    console.log(signUpData);
-
-    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setEmailOptionEmail(e.target.value);
-    };
-
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setPasswordOptionEmail(e.target.value);
-    };
-
-    const handleMagicLinkEmailChange = (
-      e: React.ChangeEvent<HTMLInputElement>
-    ) => {
-      setEmailOptionMagicLink(e.target.value);
-    };
-
-    const handleSignUpEmailChange = (
-      e: React.ChangeEvent<HTMLInputElement>
-    ) => {
-      setEmailOptionSignUp(e.target.value);
-    };
-
-    const handleSignUpPasswordChange = (
-      e: React.ChangeEvent<HTMLInputElement>
-    ) => {
-      setPasswordOptionSignUp(e.target.value);
-    };
-
-    const renderModalForms = (formOption: FormType) => {
-      return (
-        <>
-          {formOption === "email" ? (
-            <form className="flex flex-col items-center">
-              <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-8 my-auto">
-                <h1 className="text-xl font-semibold">Inicia Sesion</h1>
-                <div className="flex flex-col gap-y-2 my-2">
-                  <div>
-                    <label className="my-2" htmlFor="mail">
-                      Ingresa Tu Correo Electronico
-                    </label>
-                    <input
-                      type="email"
-                      name="mail"
-                      value={emailOptionEmail}
-                      onChange={handleEmailChange}
-                      placeholder="tu@correo.com"
-                      className="w-full px-4 border rounded-lg text-gray-700 focus:border-blue-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="my-2" htmlFor="pass">
-                      Ingresa Tu Contraseña
-                    </label>
-                    <input
-                      type="password"
-                      name="pass"
-                      value={passwordOptionEmail}
-                      onChange={handlePasswordChange}
-                      placeholder="***************"
-                      className="w-full px-4 border rounded-lg text-gray-700 focus:border-blue-500"
-                    />
-                  </div>
-                </div>
-                <button className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none">
-                  Enviar
-                </button>
-              </div>
-            </form>
-          ) : formOption === "magicLink" ? (
-            <form className="flex items-center justify-center h-full">
-              <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-                <h1 className="text-xl font-semibold mb-4">Magic Link</h1>
-                <p className="text-gray-600 mb-6">
-                  Ingresa tu correo electrónico para poder enviarte el acceso
-                </p>
-                <div className="mb-4">
-                  <input
-                    type="email"
-                    placeholder="tu@correo.com"
-                    value={emailOptionMagicLink}
-                    onChange={handleMagicLinkEmailChange}
-                    className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:border-blue-500"
-                  />
-                </div>
-                <button className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none">
-                  Enviar
-                </button>
-              </div>
-            </form>
-          ) : formOption === "sign up" ? (
-            <form className="row-start-2 px-3 py-2 h-full flex flex-col">
-              <span>
-                <label htmlFor="e-mail">Email</label>
-                <input
-                  type="email"
-                  name="e-mail"
-                  value={emailOptionSignUp}
-                  onChange={handleSignUpEmailChange}
-                />
-              </span>
-              <span>
-                <label htmlFor="pass">Contraseña</label>
-                <input
-                  type="password"
-                  name="pass"
-                  value={passwordOptionSignUp}
-                  onChange={handleSignUpPasswordChange}
-                />
-              </span>
-            </form>
-          ) : null}
-        </>
-      );
-    };
-
-    return <>{renderModalForms(formOption)}</>;
+    return <ModalContent formOption={formOption} />;
   }
 
   function renderSignUpOption() {
