@@ -9,14 +9,14 @@ import ModalCarrito from "@/app/ui/home/modal/carrito/ModalCarrito";
 import { useEffect, useState } from "react";
 
 export default function Page({ params }: { params: { vino: string } }) {
-	const [vino, setVino] = useState<VinosT>({} as VinosT);
-	const [existe, setExiste] = useState(false);
+	const [ vino, setVino ] = useState<VinosT>({} as VinosT);
+	const [ existe, setExiste ] = useState(false);
 	const { cartItems, addToCart, removeFromCart } = useCart();
-	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [contador, setContador] = useState(1);
+	const [ isModalOpen, setIsModalOpen ] = useState(false);
+	const [ contador, setContador ] = useState(1);
 
 	const vinoDecoded = decodeURIComponent(params.vino);
-	const parts = vinoDecoded.split(" ~ ");
+	const parts = vinoDecoded.split("~");
 	const id_unica: number =
 		parts.length > 0 ? Number(parts.pop()?.trim() ?? 0) : 0;
 
@@ -82,14 +82,16 @@ export default function Page({ params }: { params: { vino: string } }) {
 			if (id_unica) {
 				const { data: vino, error } = await supabase
 					.from("vinos")
-					.select("*, variedades(variedad), paises(pais)")
+					.select(`*
+						,variedades(variedad)
+						,paises(pais)
+					`)
 					.eq("id_unica", id_unica);
-
+					console.log(vino);
 				if (error) {
 					console.error("Error al obtener los vinos:", error);
 					return;
 				}
-
 				setVino(vino[0]);
 			}
 		};

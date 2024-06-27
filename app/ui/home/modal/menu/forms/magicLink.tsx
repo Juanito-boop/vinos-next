@@ -6,6 +6,7 @@ import { userLogInMagicLinkViaEmail } from "../funcionesServidor";
 async function handleMagicLink(email: string) {
   try {
     const { loginMagicLinkData } = await userLogInMagicLinkViaEmail(email)
+    console.log("MagicLink data:", loginMagicLinkData);
     return loginMagicLinkData
   } catch (error) {
     console.error("Error during MagicLink:", error);

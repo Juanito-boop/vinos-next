@@ -45,17 +45,17 @@ export default function ModalCarrito({
   function displayCartItems(): JSX.Element {
     return (
       <>
-        <div className="pb-3 pt-0 text-center">
-          <h3 className="text-xl font-normal text-gray-500">
+        <div className="pb-3 pt-0 grid grid-rows-[10%_8%_92%] h-full">
+          <h3 className="text-xl font-normal text-gray-500 text-center row-start-1 my-auto">
             Este es tu carrito de compras
           </h3>
-          <div className="flex flex-col gap-2 mt-2 h-full">
-            <div className="grid grid-cols-[10%_1fr_15%_15%] gap-x-1 rounded px-3">
-              <span className="text-lg text-start col-start-1" children="ID" />
-              <span className="text-lg text-start col-start-2" children="Producto" />
-              <span className="text-lg text-center col-start-3" children="Cantidad" />
-              <span className="text-lg text-center col-start-4" children="Precio" />
-            </div>
+          <div className="row-start-2 grid grid-cols-[10%_1fr_15%_15%] gap-x-1 rounded px-3">
+            <span className="text-lg text-start col-start-1" children="ID" />
+            <span className="text-lg text-start col-start-2" children="Producto" />
+            <span className="text-lg text-center col-start-3" children="Cantidad" />
+            <span className="text-lg text-center col-start-4" children="Precio" />
+          </div>
+          <div className="row-start-3 flex flex-col gap-1 mt-2 overflow-y-scroll py-3">
             {cartItems.length > 0 ? (
               cartItems.map((item, index) => (
                 <div
@@ -107,22 +107,22 @@ export default function ModalCarrito({
         id="modelConfirm"
         className={
           "fixed z-50 inset-0 bg-gray-900/60 " +
-          "grid grid-cols-[1fr_60%_1fr] grid-rows-[1fr_80%_1fr]"
+          "grid grid-cols-[1fr_70%_1fr] grid-rows-[1fr_80%_1fr]"
         }
       >
         <div
           className={
-            "col-start-2 row-start-2 mx-auto w-full shadow-xl rounded-lg bg-white max-w-3xl " +
-            "flex flex-col justify-between"
+            "col-start-2 row-start-2 mx-auto w-full shadow-xl rounded-lg bg-white max-w-4xl " +
+            "grid grid-rows-[85%_1fr]"
           }
         >
-          <div className="p-3 pb-0">
+          <div className="p-3 pb-0 row-start-1 max-h-[85%]">
             {renderHeader()}
             {displayCartItems()}
           </div>
-          <div className="flex flex-row justify-end">
+          <div className="row-start-2 flex flex-row justify-end bg-white">
             <button
-              className="m-3 mt-0 py-2 px-4 text-lg border rounded bg-green-500 text-white uppercase"
+              className="my-auto py-2 px-4 mx-5 text-lg border rounded bg-green-500 text-white uppercase"
               onClick={() => setIsModalOpen(false)}
               children="Pagar"
             />

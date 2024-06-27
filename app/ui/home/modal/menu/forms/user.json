@@ -1,0 +1,81 @@
+{
+  "session": {
+    "access_token": "eyJhbGciOiJIUzI1NiIsImtpZCI6Im0zOXlQMWg0bkxmRDAvZGQiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzE5Mjg0NTkzLCJpYXQiOjE3MTkyODA5OTMsImlzcyI6Imh0dHBzOi8vbnB1eHB1ZWxpbWF5cXJzbXpxdXIuc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6ImRhNjBiOTdhLTI5YTgtNDA4ZC04ZWVjLTIwNmY5NWRkMjJhMSIsImVtYWlsIjoianVhbml0b2dhbWluZzI3MDdAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6e30sInJvbGUiOiJBZG1pbiIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzE5MjgwOTkzfV0sInNlc3Npb25faWQiOiIzMTg5NjczYi1lNzYyLTQ3YWItYmRiNi1kYjEwZDBhOTc1YjQiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.6kuVIchFXuP0rAJD6vsyCeEaiHolm9LfI6BBL3xnsLs",
+    "token_type": "bearer",
+    "expires_in": 3600,
+    "expires_at": 1719284593,
+    "refresh_token": "iYPcJggpu6CLc_zhF4wMow",
+    "user": {
+      "id": "da60b97a-29a8-408d-8eec-206f95dd22a1",
+      "aud": "authenticawted",
+      "role": "Admin",
+      "email": "juanitogaming2707@gmail.com",
+      "email_confirmed_at": "2023-06-13T05:41:53.661187Z",
+      "phone": "",
+      "confirmation_sent_at": "2023-06-13T05:41:22.370192Z",
+      "confirmed_at": "2023-06-13T05:41:53.661187Z",
+      "recovery_sent_at": "2024-06-24T23:39:28.297122Z",
+      "last_sign_in_at": "2024-06-25T02:03:13.1337541Z",
+      "app_metadata": {
+        "provider": "email",
+        "providers": ["email"]
+      },
+      "user_metadata": {},
+      "identities": [
+        {
+          "identity_id": "3c93f94f-2802-4831-9d70-0873a942373d",
+          "id": "da60b97a-29a8-408d-8eec-206f95dd22a1",
+          "user_id": "da60b97a-29a8-408d-8eec-206f95dd22a1",
+          "identity_data": {
+            "email": "juanitogaming2707@gmail.com",
+            "sub": "da60b97a-29a8-408d-8eec-206f95dd22a1"
+          },
+          "provider": "email",
+          "last_sign_in_at": "2023-06-13T05:41:22.366716Z",
+          "created_at": "2023-06-13T05:41:22.366752Z",
+          "updated_at": "2023-06-13T05:41:22.366752Z",
+          "email": "juanitogaming2707@gmail.com"
+        }
+      ],
+      "created_at": "2023-06-13T05:41:22.358194Z",
+      "updated_at": "2024-06-25T02:03:13.144557Z",
+      "is_anonymous": false
+    }
+  },
+  "user": {
+    "id": "da60b97a-29a8-408d-8eec-206f95dd22a1",
+    "aud": "authenticated",
+    "role": "Admin",
+    "email": "juanitogaming2707@gmail.com",
+    "email_confirmed_at": "2023-06-13T05:41:53.661187Z",
+    "phone": "",
+    "confirmation_sent_at": "2023-06-13T05:41:22.370192Z",
+    "confirmed_at": "2023-06-13T05:41:53.661187Z",
+    "recovery_sent_at": "2024-06-24T23:39:28.297122Z",
+    "last_sign_in_at": "2024-06-25T02:03:13.1337541Z",
+    "app_metadata": {
+      "provider": "email",
+      "providers": ["email"]
+    },
+    "user_metadata": {},
+    "identities": [
+      {
+        "identity_id": "3c93f94f-2802-4831-9d70-0873a942373d",
+        "id": "da60b97a-29a8-408d-8eec-206f95dd22a1",
+        "user_id": "da60b97a-29a8-408d-8eec-206f95dd22a1",
+        "identity_data": {
+          "email": "juanitogaming2707@gmail.com",
+          "sub": "da60b97a-29a8-408d-8eec-206f95dd22a1"
+        },
+        "provider": "email",
+        "last_sign_in_at": "2023-06-13T05:41:22.366716Z",
+        "created_at": "2023-06-13T05:41:22.366752Z",
+        "updated_at": "2023-06-13T05:41:22.366752Z",
+        "email": "juanitogaming2707@gmail.com"
+      }
+    ],
+    "created_at": "2023-06-13T05:41:22.358194Z",
+    "updated_at": "2024-06-25T02:03:13.144557Z",
+    "is_anonymous": false
+  }
+}
