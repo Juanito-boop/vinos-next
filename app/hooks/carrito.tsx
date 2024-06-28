@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CartItem } from "@/app/lib/Interfaces";
 
 const useCart = () => {
-	const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+	const [ cartItems, setCartItems ] = useState<CartItem[]>(() => {
 		if (typeof window !== "undefined") {
 			const items = JSON.parse(
 				localStorage.getItem("cartItems") || "[]"

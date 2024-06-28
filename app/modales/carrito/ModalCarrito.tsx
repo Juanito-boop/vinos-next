@@ -55,7 +55,7 @@ export default function ModalCarrito({
             <span className="text-lg text-center col-start-3" children="Cantidad" />
             <span className="text-lg text-center col-start-4" children="Precio" />
           </div>
-          <div className="row-start-3 flex flex-col gap-1 mt-2 overflow-y-scroll py-3">
+          <div className="row-start-3 flex flex-col gap-1 mt-2 overflow-y-scroll">
             {cartItems.length > 0 ? (
               cartItems.map((item, index) => (
                 <div

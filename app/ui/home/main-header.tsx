@@ -5,7 +5,7 @@ import { useState } from "react";
 import ModalMenu from "../../modales/menu/ModalMenu";
 
 export default function MainHeader() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [ isModalOpen, setIsModalOpen ] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);

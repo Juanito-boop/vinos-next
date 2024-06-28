@@ -31,8 +31,8 @@ export default function CarouselSection({
 	vinos,
 	variedad,
 }: CarouselSectionProps) {
-	const [page, setPage] = useState(0);
-	const [itemsPerPage, setItemsPerPage] = useState(4);
+	const [ page, setPage ] = useState(0);
+	const [ itemsPerPage, setItemsPerPage ] = useState(4);
 
 	useEffect(() => {
 		const updateItemsPerPage = () => {
