@@ -5,7 +5,7 @@ import { CartItem } from "@/app/lib/Interfaces";
 import { VinosT } from "@/app/lib/tablas";
 import { supabase } from "@/app/supabase";
 import MainHeader from "@/app/ui/home/main-header";
-import ModalCarrito from "@/app/ui/home/modal/carrito/ModalCarrito";
+import ModalCarrito from "@/app/modales/carrito/ModalCarrito";
 import { useEffect, useState } from "react";
 
 export default function Page({ params }: { params: { vino: string } }) {

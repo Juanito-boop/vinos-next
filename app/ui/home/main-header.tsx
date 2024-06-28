@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import ModalMenu from "./modal/menu/ModalMenu";
+import ModalMenu from "../../modales/menu/ModalMenu";
 
 export default function MainHeader() {
   const [isModalOpen, setIsModalOpen] = useState(false);

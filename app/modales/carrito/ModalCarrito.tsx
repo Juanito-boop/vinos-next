@@ -71,7 +71,7 @@ export default function ModalCarrito({
                 </div>
               ))
             ) : (
-              <div className="text-lg my-3 bg-blue-100 p-3">
+              <div className="text-lg my-3 bg-blue-100 p-3 text-center">
                 No hay elementos en el carrito.
               </div>
             )}
@@ -104,18 +104,15 @@ export default function ModalCarrito({
   return (
     <>
       <div
-        id="modelConfirm"
         className={
           "fixed z-50 inset-0 bg-gray-900/60 " +
           "grid grid-cols-[1fr_70%_1fr] grid-rows-[1fr_80%_1fr]"
-        }
-      >
+        }>
         <div
           className={
             "col-start-2 row-start-2 mx-auto w-full shadow-xl rounded-lg bg-white max-w-4xl " +
             "grid grid-rows-[85%_1fr]"
-          }
-        >
+          }>
           <div className="p-3 pb-0 row-start-1 max-h-[85%]">
             {renderHeader()}
             {displayCartItems()}

@@ -4,7 +4,7 @@ import useCart from "@/app/hooks/carrito";
 import { Paises, Variedades } from "@/app/lib/Interfaces";
 import { poppins } from "@/app/ui/fonts";
 import { useState } from "react";
-import ModalCarrito from "../modal/carrito/ModalCarrito";
+import ModalCarrito from "../../../modales/carrito/ModalCarrito";
 
 // Props interface
 interface AsideMainClientProps {
