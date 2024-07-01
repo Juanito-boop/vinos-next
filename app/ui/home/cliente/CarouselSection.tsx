@@ -67,7 +67,7 @@ export default function CarouselSection({
 
 	return (
 		<section className="mx-1 pb-[3%] items-center overflow-x-auto m-0 scroll-smooth">
-			<h2 className="my-3 flex items-center justify-center font-poppins text-[2em] font-bold leading-10 text-principalColor1 uppercase" children={variedad} />
+			<h2 className="my-3 flex items-center justify-center font-poppins text-[2em] font-bold leading-10 text-principalColor1 uppercase">{variedad}</h2>	
 			<Carousel
 				vinos={vinos}
 				page={page}

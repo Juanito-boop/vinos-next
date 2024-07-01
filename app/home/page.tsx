@@ -1,6 +1,7 @@
 import MainHeader from "@/app/ui/home/main-header";
-import CardsMain from "@/app/ui/home/servidor/CardsMain";
 import AsideMainServer from "../ui/home/servidor/AsideMainServer";
+import CardsMainClientWrapper from "@/app/ui/home/CardsMainClientWrapper";
+import CardsMain from "../ui/home/servidor/CardsMain";
 
 export default function Page() {
 	return (

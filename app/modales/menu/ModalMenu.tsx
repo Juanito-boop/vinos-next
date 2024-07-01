@@ -1,21 +1,44 @@
-"use client";
+// Eliminamos las importaciones no utilizadas
+// import {
+//   userLogInEmailPassword,
+//   userLogInMagicLinkViaEmail,
+//   userSignUp,
+// } from "./funcionesServidor";
 
-import { type ModalMenu } from "@/app/lib/modal";
 import React, { useEffect, useState } from "react";
-import {
-  userLogInEmailPassword,
-  userLogInMagicLinkViaEmail,
-  userSignUp,
-} from "./funcionesServidor";
 import EmailPasswordForm from "./forms/emailPassword";
 import MagicLinkForm from "./forms/magicLink";
 import SignUpForm from "./forms/signUp";
+import { type ModalMenu } from "@/app/lib/modal";
 
 type FormType = "email" | "magicLink" | "sign up";
 
 export default function ModalMenu({ isModalOpen, setIsModalOpen }: ModalMenu) {
-  if (!isModalOpen) return null;
+  // Mover useState fuera de cualquier condicional para cumplir con las reglas de los Hooks
   const [form, setForm] = useState<FormType>("email");
+
+  // Asegurarse de que useEffect no se llame condicionalmente
+  useEffect(() => {
+    if (!isModalOpen) {
+      return;
+    }
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsModalOpen(false);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.body.style.overflow = "unset";
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isModalOpen, setIsModalOpen]);
+
+  if (!isModalOpen) return null;
 
   const renderForm = (newForm: FormType) => {
     setForm(newForm);
@@ -46,7 +69,8 @@ export default function ModalMenu({ isModalOpen, setIsModalOpen }: ModalMenu) {
             </button>
           </div>
           <div className="pb-2 pt-0 text-center">
-            <h3 className="text-xl font-normal text-black" children={title} />
+            {/* Corregir el uso de children como prop */}
+            <h3 className="text-xl font-normal text-black">{title}</h3>
           </div>
         </div>
       </>
@@ -59,16 +83,20 @@ export default function ModalMenu({ isModalOpen, setIsModalOpen }: ModalMenu) {
         <div className="row-start-1">
           {renderModalHeader("Inicia Sesion")}
           <div className="grid grid-cols-2 gap-3 px-4">
+            {/* Corregir el uso de children como prop */}
             <button
               className="p-2 text-center text-black border border-black rounded-lg col-start-1"
-              children="Email"
               onClick={() => renderForm("email")}
-            />
+            >
+              Email
+            </button>
+            {/* Corregir el uso de children como prop */}
             <button
               className="p-2 text-center text-black border border-black rounded-lg col-start-2"
-              children="Magic Link"
               onClick={() => renderForm("magicLink")}
-            />
+            >
+              Magic Link
+            </button>
           </div>
         </div>
       </>
@@ -95,11 +123,13 @@ export default function ModalMenu({ isModalOpen, setIsModalOpen }: ModalMenu) {
       <>
         <div className="flex flex-row gap-1 mx-auto my-2 row-start-3">
           <p className="text-black my-auto">No Tienes Una Cuenta?</p>
+          {/* Corregir el uso de children como prop */}
           <button
             className="p-2 text-center text-blue-500"
             onClick={() => renderForm("sign up")}
-            children="Crea Una"
-          />
+          >
+            Crea Una
+          </button>
         </div>
       </>
     );
@@ -110,35 +140,17 @@ export default function ModalMenu({ isModalOpen, setIsModalOpen }: ModalMenu) {
       <>
         <div className="flex flex-row gap-1 mx-auto my-2 row-start-3">
           <p className="text-black my-auto">Ya Tienes Una Cuenta?</p>
+          {/* Corregir el uso de children como prop */}
           <button
             className="p-2 text-center text-blue-500"
             onClick={() => renderForm("email")}
-            children="Inicia Sesion"
-          />
+          >
+            Inicia Sesion
+          </button>
         </div>
       </>
     );
   }
-
-  useEffect(() => {
-    if (!isModalOpen) {
-      return;
-    }
-
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsModalOpen(false);
-      }
-    };
-
-    document.body.style.overflow = "hidden";
-    document.addEventListener("keydown", handleEscape);
-
-    return () => {
-      document.body.style.overflow = "unset";
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, [isModalOpen, setIsModalOpen]);
 
   return (
     <>

@@ -6,7 +6,8 @@ import { VinosT } from "@/app/lib/tablas";
 import { supabase } from "@/app/supabase";
 import MainHeader from "@/app/ui/home/main-header";
 import ModalCarrito from "@/app/modales/carrito/ModalCarrito";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
 export default function Page({ params }: { params: { vino: string } }) {
 	const [ vino, setVino ] = useState<VinosT>({} as VinosT);
@@ -15,7 +16,10 @@ export default function Page({ params }: { params: { vino: string } }) {
 	const [ isModalOpen, setIsModalOpen ] = useState(false);
 	const [ contador, setContador ] = useState(1);
 
+	const queryParams = useParams();
 	const vinoDecoded = decodeURIComponent(params.vino);
+	console.log(vinoDecoded);
+	console.log(queryParams.vino);
 	const parts = vinoDecoded.split("~");
 	const id_unica: number =
 		parts.length > 0 ? Number(parts.pop()?.trim() ?? 0) : 0;
@@ -28,7 +32,9 @@ export default function Page({ params }: { params: { vino: string } }) {
 	};
 
 	const handleOpenModal = () => setIsModalOpen(true);
-	const handleCloseModal = () => setIsModalOpen(false);
+	const handleCloseModal = useCallback(() => {
+		setIsModalOpen(false);
+	}, []);
 
 	const handleAddToCart = (vino: VinosT) => {
 		addToCart({
@@ -47,12 +53,24 @@ export default function Page({ params }: { params: { vino: string } }) {
 	};
 
 	const banderas: { [key: string]: () => JSX.Element | null } = {
-		Argentina: () => <img src="/Argentina.svg" alt="Bandera Argentina" />,
-		Chile: () => <img src="/Chile.svg" alt="Bandera Chile" />,
-		Colombia: () => <img src="/Colombia.svg" alt="Bandera Colombia" />,
-		España: () => <img src="/España.svg" alt="Bandera España" />,
-		Francia: () => <img src="/Francia.svg" alt="Bandera Francia" />,
-		Italia: () => <img src="/Italia.svg" alt="Bandera Italia" />,
+		Argentina: () => <picture>
+			<img src="/Argentina.svg" alt="Bandera Argentina" />
+		</picture>,
+		Chile: () => <picture>
+			<img src="/Chile.svg" alt="Bandera Chile" />
+		</picture>,
+		Colombia: () => <picture>
+			<img src="/Colombia.svg" alt="Bandera Colombia" />
+		</picture>,
+		España: () => <picture>
+			<img src="/España.svg" alt="Bandera España" />
+		</picture>,
+		Francia: () => <picture>
+			<img src="/Francia.svg" alt="Bandera Francia" />
+		</picture>,
+		Italia: () => <picture>
+			<img src="/Italia.svg" alt="Bandera Italia" />
+		</picture>,
 	};
 
 	const getBandera = (banderaName: string) => {
@@ -65,7 +83,9 @@ export default function Page({ params }: { params: { vino: string } }) {
 			className="grid grid-cols-[10%_1fr] gap-3 border border-black w-52 py-2 px-4 rounded-lg my-auto ml-auto bg-white/90"
 			onClick={action}
 		>
-			<img src={imgSrc} className="col-start-1 w-5 h-5 m-auto" />
+			<picture>
+				<img src={imgSrc} className="col-start-1 w-5 h-5 m-auto" alt="cart indicator" />
+			</picture>
 			<p className="col-start-2 mx-auto">{label}</p>
 		</button>
 	);
@@ -140,7 +160,9 @@ export default function Page({ params }: { params: { vino: string } }) {
 						className="border border-principalColor1 rounded-lg p-5 w-20 h-20 my-3 bg-white/90"
 						onClick={handleOpenModal}
 					>
-						<img src="/carrito.svg" alt="" />
+						<picture>
+							<img src="/carrito.svg" alt="" />
+						</picture>
 					</button>
 					{isModalOpen && (
 						<ModalCarrito
@@ -153,7 +175,9 @@ export default function Page({ params }: { params: { vino: string } }) {
 				<div className="col-start-2">
 					<div className="flex flex-row justify-center h-auto">
 						<div className="w-[40%] pb-5 px-2 pt-1 relative">
-							<img src={vino.url_imagen} className="mt-3 p-1" alt="" />
+							<picture>
+								<img src={vino.url_imagen} className="mt-3 p-1" alt="" />
+							</picture>
 							<div
 								className="absolute top-0 right-0 mr-5 mt-5"
 								style={{ width: "64px", height: "64px" }}
@@ -164,16 +188,21 @@ export default function Page({ params }: { params: { vino: string } }) {
 						<div className="w-[60%] px-2 pt-1 flex flex-col gap-y-1 pb-5">
 							<h1
 								className="text-4xl mx-3 mt-3 border-b border-black w-auto pb-2 text-center"
-								children={
-									vino.nombre + " " + vino.variedades?.variedad || vino.tipo
-								}
-							/>
-							<p className="text-xl" children={vino.descripcion} />
+							>
+								{vino.nombre + " " + vino.variedades?.variedad || vino.tipo}
+							</h1>
+							<p className="text-xl">{vino.descripcion}</p>
 							<div className="flex flex-row py-2 justify-between">
-								<span
+								{/* <span
 									className="text-2xl mx-3 my-auto"
-									children={"$" + vino.precio + " COP"}
-								/>
+									{"$" + vino.precio + " COP"}
+								/> */}
+								<span className="text-2xl mx-3 my-auto">
+									{new Intl.NumberFormat("es-CO", {
+										style: "currency",
+										currency: "COP",
+									}).format(vino.precio)}
+								</span>
 								{existe ? (
 									<div className="flex flex-row gap-3">
 										<div className="flex flex-row justify-center gap-4"></div>
@@ -189,16 +218,19 @@ export default function Page({ params }: { params: { vino: string } }) {
 											<button
 												onClick={decrementar}
 												className="text-center px-3 py-1 bg-red-500 text-white rounded-l"
-												children="-"
-											/>
+												// "-"
+											>
+												{"-"}
+											</button>
 											<span className="w-16 text-center my-auto ">
 												{contador}
 											</span>
 											<button
 												onClick={incrementar}
 												className="text-center px-3 py-1 bg-green-500 text-white rounded-r"
-												children="+"
-											/>
+												>
+													{"+"}
+												</button>
 										</div>
 										{renderCartButton(
 											() => handleAddToCart(vino),

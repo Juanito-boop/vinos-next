@@ -6,6 +6,26 @@ export default function ModalCarrito({
   setIsModalOpen,
   cartItems,
 }: ModalCarrito) {
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsModalOpen(false);
+      }
+    };
+
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+      document.addEventListener("keydown", handleEscape);
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isModalOpen, setIsModalOpen]);
+
   if (!isModalOpen) return null;
 
   function renderHeader() {
@@ -13,7 +33,9 @@ export default function ModalCarrito({
       <>
         <div className="flex justify-between p-2">
           <button className="mr-auto inline-flex items-center rounded-lg bg-transparent p-1.5">
-            <img src="/carrito.svg" alt="Carrito" className="h-5 w-5" />
+            <picture>
+              <img src="/carrito.svg" alt="Carrito" className="h-5 w-5" />
+            </picture>
           </button>
           <button
             onClick={() => setIsModalOpen(false)}
@@ -38,10 +60,6 @@ export default function ModalCarrito({
     );
   }
 
-  /**
-   * Renders a section of a modal that displays the items in a shopping cart.
-   * @returns JSX element representing the cart items section of the modal
-   */
   function displayCartItems(): JSX.Element {
     return (
       <>
@@ -50,10 +68,10 @@ export default function ModalCarrito({
             Este es tu carrito de compras
           </h3>
           <div className="row-start-2 grid grid-cols-[10%_1fr_15%_15%] gap-x-1 rounded px-3">
-            <span className="text-lg text-start col-start-1" children="ID" />
-            <span className="text-lg text-start col-start-2" children="Producto" />
-            <span className="text-lg text-center col-start-3" children="Cantidad" />
-            <span className="text-lg text-center col-start-4" children="Precio" />
+            <span className="text-lg text-start col-start-1">{"ID"}</span>
+            <span className="text-lg text-start col-start-2">{"Producto"}</span>
+            <span className="text-lg text-center col-start-3">{"Cantidad"}</span>
+            <span className="text-lg text-center col-start-4">Precio</span>
           </div>
           <div className="row-start-3 flex flex-col gap-1 mt-2 overflow-y-scroll">
             {cartItems.length > 0 ? (
@@ -64,10 +82,10 @@ export default function ModalCarrito({
                     index % 2 === 0 ? "bg-blue-100" : "bg-green-100"
                   }`}
                 >
-                  <span className="text-lg col-start-1 text-start" children={item.productId} />
-                  <span className="text-lg col-start-2 text-start" children={item.nombre} />
-                  <span className="text-lg col-start-3 text-center" children={item.quantity} />
-                  <span className="text-lg col-start-4 text-center" children={"$" + item.price} />
+                  <span className="text-lg col-start-1 text-start">{item.productId}</span>
+                  <span className="text-lg col-start-2 text-start">{item.nombre}</span>
+                  <span className="text-lg col-start-3 text-center">{item.quantity}</span>
+                  <span className="text-lg col-start-4 text-center">{"$" + item.price}</span>
                 </div>
               ))
             ) : (
@@ -80,26 +98,6 @@ export default function ModalCarrito({
       </>
     );
   }
-
-  useEffect(() => {
-    if (!isModalOpen) {
-      return;
-    }
-
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsModalOpen(false);
-      }
-    };
-
-    document.body.style.overflow = "hidden";
-    document.addEventListener("keydown", handleEscape);
-
-    return () => {
-      document.body.style.overflow = "unset";
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, [isModalOpen, setIsModalOpen]);
 
   return (
     <>
@@ -121,8 +119,9 @@ export default function ModalCarrito({
             <button
               className="my-auto py-2 px-4 mx-5 text-lg border rounded bg-green-500 text-white uppercase"
               onClick={() => setIsModalOpen(false)}
-              children="Pagar"
-            />
+            >
+              Pagar
+            </button>
           </div>
         </div>
       </div>

@@ -26,16 +26,19 @@ export default function MainHeader() {
           <div className="inline-flex flex-col items-center justify-center w-auto h-auto">
             <div
               className="text-center text-[40px] font-semibold text-black"
-              children="LOS VINOS"
-            />
+            >
+              {"LOS VINOS"}
+            </div>
             <div
               className="text-2xl font-semibold text-center text-black"
-              children="Wine Bar"
-            />
+            >
+              {"Wine Bar"}
+            </div>
             <div
               className="text-2xl font-semibold text-center text-black"
-              children="Villa de Leyva, Carrera 9 #11-47 Segundo piso"
-            />
+            >
+              {"Villa de Leyva, Carrera 9 #11-47 Segundo piso"}
+            </div>
             <div className="inline-flex h-[26px] items-center justify-center self-stretch mx-auto">
               <div className="text-center text-black flex flex-row gap-2 p-2">
                 <p className="text-lg font-bold">CONTACTANOS (+57) 3219085857</p>
@@ -49,12 +52,14 @@ export default function MainHeader() {
             id="boton-menu"
             onClick={handleOpenModal}
           >
-            <img
-              src="https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/some/bars-solid.svg"
-              id="icono-menu"
-              alt=""
-              className="w-7 align-top cursor-pointer"
-            />
+            <picture>
+              <img
+                src="https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/some/bars-solid.svg"
+                id="icono-menu"
+                alt=""
+                className="w-7 align-top cursor-pointer"
+              />
+            </picture>
           </button>
           {isModalOpen && (
             <ModalMenu

@@ -20,8 +20,9 @@ export default function Carousel({
         <button
           className="px-1 py-4 m-auto border rounded-full bg-white/80 border-principalColor1 transition-transform duration-300 ease-in-out hover:scale-105"
           onClick={onPrevPage}
-          children="←"
-        />
+        >
+          {"←"}
+        </button>
         <div
           className={
             "grid justify-center mx-auto transition-transform duration-300 ease-in-out transform-gpu" +
@@ -53,17 +54,18 @@ export default function Carousel({
               <div className="p-4 border-2 border-principalColor1 rounded-b-[10px]">
                 <span
                   className="mb-2 text-[0.9em] font-poppins text-principalColor1 font-semibold"
-                  children={vino.nombre}
-                />
+                >{vino.nombre}</span>
                 <p
                   className="mb-2 text-[0.9em] font-poppins text-principalColor1"
-                  children={vino.variedades.variedad || "Variedad Desconocida"}
-                />
+                >
+                  {vino.variedades.variedad || "Variedad Desconocida"}
+                </p>
                 <div className="flex items-center justify-between">
                   <p
                     className="mr-0 font-semibold font-poppins text-principalColor1 text-[0.9em]"
-                    children={`$${vino.precio} COP`}
-                  />
+                  >
+                    {`$${vino.precio} COP`}
+                  </p>
                   <a
                     href={`/informacion/${
                       vino.nombre +
@@ -73,8 +75,9 @@ export default function Carousel({
                       vino.id_unica
                     }`}
                     className="px-2 py-1 text-xs font-semibold uppercase transition-all duration-150 ease-linear border rounded-lg outline-none text-emerald-500 background-transparent focus:outline-none border-emerald-500"
-                    children="INFORMACIÓN"
-                  />
+                  >
+                    {"INFORMACIÓN"}
+                  </a>
                 </div>
               </div>
             </article>
@@ -83,8 +86,9 @@ export default function Carousel({
         <button
           className="px-1 py-4 m-auto border rounded-full bg-white/80 border-principalColor1"
           onClick={onNextPage}
-          children="→"
-        />
+        >
+          {"→"}
+        </button>
       </div>
     </>
   );

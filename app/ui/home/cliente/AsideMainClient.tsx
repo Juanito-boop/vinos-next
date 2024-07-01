@@ -19,7 +19,26 @@ interface AsideMainClientProps {
  * @param title The title of the list section.
  * @returns JSX element representing the styled section with title and items list.
  */
-function renderList(items: { id: number; name: string }[], title: string) {
+const RenderList = ({ items, title }: { items: { id: number; name: string, arreglo: string }[], title: string }) => {
+	const [selectedItems, setSelectedItems] = useState<string[]>([]);
+
+	const handleCheckboxChange = (itemName: string, arreglo: string) => {
+		const newSelectedItems = selectedItems.includes(itemName)
+			? selectedItems.filter(item => item !== itemName)
+			: [...selectedItems, itemName];
+
+		// Ordena los elementos seleccionados alfabéticamente
+		const sortedSelectedItems = newSelectedItems.sort();
+
+		setSelectedItems(sortedSelectedItems);
+
+		const queryString = sortedSelectedItems.length > 0
+			? `?${arreglo}=${sortedSelectedItems.join(',')}`
+			: '';
+
+		window.history.pushState(null, '', queryString || window.location.pathname);
+	};
+
 	return (
 		<section className="pb-2 border-t bg-normalColor11 border-principalColor1 rounded-b-xl">
 			<span className="flex items-center justify-center my-2 text-xl font-bold text-principalColor1">
@@ -27,17 +46,22 @@ function renderList(items: { id: number; name: string }[], title: string) {
 			</span>
 			<ul className="flex flex-col gap-2">
 				{items.map((item) => (
-					<li
-						key={item.id}
-						className="flex items-start pl-3 text-sm font-semibold text-black"
-					>
-						{item.name}
+					<li key={item.id} className="flex items-center pl-3 text-sm font-semibold text-black">
+						<input
+							type="checkbox"
+							id={`checkbox-${item.id}`}
+							name={item.name}
+							value={item.name}
+							onChange={() => handleCheckboxChange(item.name, item.arreglo)}
+							className="mr-2"
+						/>
+						<label htmlFor={`checkbox-${item.id}`}>{item.name}</label>
 					</li>
 				))}
 			</ul>
 		</section>
 	);
-}
+};
 
 export default function AsideMainClient({
 	variedades,
@@ -56,7 +80,9 @@ export default function AsideMainClient({
 				className="w-16 h-16 p-3 mx-auto my-4 border border-principalColor1 rounded-lg"
 				onClick={handleOpenModal}
 			>
-				<img src="/carrito.svg" alt="Carrito" />
+				<picture>
+					<img src="/carrito.svg" alt="Carrito" />
+				</picture>
 			</button>
 			{isModalOpen && (
 				<ModalCarrito
@@ -67,16 +93,23 @@ export default function AsideMainClient({
 			)}
 			<span
 				className={`${poppins.className} flex items-center justify-center text-[1.5em] font-bold text-principalColor1 bg-normalColor11 rounded-t-xl px-5 py-2`}
-				children="FILTROS"
+			>{"FILTROS"}</span>
+			<RenderList
+				items={variedades.map((v) => ({
+					id: v.id,
+					name: v.variedad,
+					arreglo: "variedades"
+				}))}
+				title="VARIEDADES"
 			/>
-			{renderList(
-				variedades.map((v) => ({ id: v.id, name: v.variedad })),
-				"VARIEDADES"
-			)}
-			{renderList(
-				paises.map((p) => ({ id: p.id, name: p.pais })),
-				"PAISES"
-			)}
+			{/* <RenderList
+							items={paises.map((p) => ({
+									id: p.id,
+									name: p.pais,
+									arreglo: "paises"
+							}))}
+							title="PAISES"
+					/> */}
 		</aside>
 	);
 }
