@@ -1,0 +1,166 @@
+{
+  "Merlot": [
+    {
+      "id": 1,
+      "nombre": "Petirrojo",
+      "precio": 87.422,
+      "variedad": 5,
+      "id_unica": 245726,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/245726.png",
+      "variedades": { "variedad": "Merlot" },
+      "paises": { "pais": "Chile" }
+    }
+  ],
+  "Malbec": [
+    {
+      "id": 2,
+      "nombre": "Posta Pizzella",
+      "precio": 98.842,
+      "variedad": 4,
+      "id_unica": 933404,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/933404.png",
+      "variedades": { "variedad": "Malbec" },
+      "paises": { "pais": "Argentina" }
+    },
+    {
+      "id": 11,
+      "nombre": "Angelica Zapata",
+      "precio": 569.962,
+      "variedad": 4,
+      "id_unica": 850550,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/850550.png",
+      "variedades": { "variedad": "Malbec" },
+      "paises": { "pais": "Argentina" }
+    },
+    {
+      "id": 13,
+      "nombre": "Zuccardi Serie A",
+      "precio": 102.762,
+      "variedad": 4,
+      "id_unica": 438553,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/438553.png",
+      "variedades": { "variedad": "Malbec" },
+      "paises": { "pais": "Argentina" }
+    },
+    {
+      "id": 14,
+      "nombre": "Cerro Verde",
+      "precio": 91.362,
+      "variedad": 4,
+      "id_unica": 178631,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/178631.png",
+      "variedades": { "variedad": "Malbec" },
+      "paises": { "pais": "Argentina" }
+    }
+  ],
+  "Cabernet Sauvignon": [
+    {
+      "id": 3,
+      "nombre": "Marquez de villa de leyva",
+      "precio": 477.162,
+      "variedad": 2,
+      "id_unica": 948930,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/948930.png",
+      "variedades": { "variedad": "Cabernet Sauvignon" },
+      "paises": { "pais": "Colombia" }
+    },
+    {
+      "id": 4,
+      "nombre": "Don Melchor",
+      "precio": 174.622,
+      "variedad": 2,
+      "id_unica": 543152,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/543152.png",
+      "variedades": { "variedad": "Cabernet Sauvignon" },
+      "paises": { "pais": "Chile" }
+    },
+    {
+      "id": 7,
+      "nombre": "Reserva de la Tierra",
+      "precio": 75.962,
+      "variedad": 2,
+      "id_unica": 323324,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/323324.png",
+      "variedades": { "variedad": "Cabernet Sauvignon" },
+      "paises": { "pais": "Chile" }
+    },
+    {
+      "id": 10,
+      "nombre": "Montes Alpha M",
+      "precio": 208.962,
+      "variedad": 2,
+      "id_unica": 782699,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/782699.png",
+      "variedades": { "variedad": "Cabernet Sauvignon" },
+      "paises": { "pais": "Chile" }
+    }
+  ],
+  "Carménère": [
+    {
+      "id": 5,
+      "nombre": "Purple Angel",
+      "precio": 113.962,
+      "variedad": 3,
+      "id_unica": 330628,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/330628.png",
+      "variedades": { "variedad": "Carménère" },
+      "paises": { "pais": "Chile" }
+    }
+  ],
+  "Pinot Grigio": [
+    {
+      "id": 6,
+      "nombre": "Muga",
+      "precio": 75.962,
+      "variedad": 6,
+      "id_unica": 692159,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/692159.png",
+      "variedades": { "variedad": "Pinot Grigio" },
+      "paises": { "pais": "España" }
+    },
+    {
+      "id": 8,
+      "nombre": "Maison Castel Gran Reserva",
+      "precio": 83.582,
+      "variedad": 6,
+      "id_unica": 191880,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/191880.png",
+      "variedades": { "variedad": "Pinot Grigio" },
+      "paises": { "pais": "España" }
+    },
+    {
+      "id": 9,
+      "nombre": "Santa Margherita",
+      "precio": 189.962,
+      "variedad": 6,
+      "id_unica": 257609,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/257609.png",
+      "variedades": { "variedad": "Pinot Grigio" },
+      "paises": { "pais": "Italia" }
+    }
+  ],
+  "Cabernet Franc": [
+    {
+      "id": 12,
+      "nombre": "Gran Enemigo",
+      "precio": 68.362,
+      "variedad": 1,
+      "id_unica": 652132,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/652132.png",
+      "variedades": { "variedad": "Cabernet Franc" },
+      "paises": { "pais": "Argentina" }
+    }
+  ],
+  "Tempranillo": [
+    {
+      "id": 15,
+      "nombre": "Codice",
+      "precio": 45.562,
+      "variedad": 7,
+      "id_unica": 265178,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/265178.png",
+      "variedades": { "variedad": "Tempranillo" },
+      "paises": { "pais": "Argentina" }
+    }
+  ]
+}

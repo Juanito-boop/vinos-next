@@ -4,7 +4,7 @@ import useCart from "@/app/hooks/carrito";
 import { Paises, Variedades } from "@/app/lib/Interfaces";
 import { poppins } from "@/app/ui/fonts";
 import { useState } from "react";
-import ModalCarrito from "../../../modales/carrito/ModalCarrito";
+import ModalCarrito from "@/app/modales/carrito/ModalCarrito";
 
 // Props interface
 interface AsideMainClientProps {
@@ -102,14 +102,14 @@ export default function AsideMainClient({
 				}))}
 				title="VARIEDADES"
 			/>
-			{/* <RenderList
+			<RenderList
 							items={paises.map((p) => ({
 									id: p.id,
 									name: p.pais,
 									arreglo: "paises"
 							}))}
 							title="PAISES"
-					/> */}
+					/>
 		</aside>
 	);
 }

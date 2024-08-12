@@ -1,91 +1,69 @@
 "use client"
 
 import { useEffect, useState } from 'react';
-
-interface Main {
-  id: number;
-  nombre: string;
-  precio: number;
-  variedad: number;
-  id_unica: number;
-  url_imagen: string;
-  variedades: Variedades;
-  paises: Paises;
-}
-
-interface Paises {
-  pais: string;
-}
-
-interface Variedades {
-  variedad: string;
-}
+import { DataOrganizada } from "./interfaces";
+import CarouselSection from './cliente/CarouselSection';
 
 export default function FilteredCards() {
-  const [variedadesArray, setVariedadesArray] = useState<string[]>([]);
-  const [data, setData] = useState<{ vinos: Main[], variedades: Variedades[] } | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+	const [loading, setLoading] = useState<boolean>(true);
+	const [data, setData] = useState<DataOrganizada | null>(null);
+	const [variedadesArray, setVariedadesArray] = useState<string[]>([]);
+	const [fetched, setFetched] = useState<boolean>(false);  // Estado de control
 
-  useEffect(() => {
-    // Función que actualiza variedadesArray si hay cambios en los parámetros de la URL
-    const checkVariedades = () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const variedadesValue = urlParams.get('variedades');
+	const checkVariedades = () => {
+		const urlParams = new URLSearchParams(window.location.search);
+		const variedadesValue = urlParams.get('variedades');
 
-      if (variedadesValue) {
-        const nuevasVariedades = variedadesValue.split(',');
-        setVariedadesArray((prevArray) => {
-          const updatedArray = [...new Set(nuevasVariedades)];
-          // Solo actualizar si hay un cambio real
-          if (JSON.stringify(prevArray) !== JSON.stringify(updatedArray)) {
-            return updatedArray;
-          }
-          return prevArray;
-        });
-      } else {
-        setVariedadesArray([]);
-      }
-    };
+		if (variedadesValue) {
+			const nuevasVariedades = variedadesValue.split(',');
+			setVariedadesArray(nuevasVariedades);
+		} else {
+			setVariedadesArray([]);
+		}
+	};
 
-    // Ejecutar la función al cargar el componente
-    checkVariedades();
+	const fetchData = async () => {
+		console.log("Fetching data...");
+		setLoading(true);
 
-    // Escuchar cambios en el evento "popstate" (cuando la historia de navegación cambia)
-    const handlePopState = () => checkVariedades();
-    window.addEventListener('popstate', handlePopState);
+		let url = "/api/vinos";
+		if (variedadesArray.length > 0) {
+			url = `/api/vinos?variedades=${variedadesArray.join(',')}`;
+		}
+		const response = await fetch(url).then((res) => res.json());
+		setData(response);
+		setFetched(true);
+	};
+	useEffect(() => {
+		if (!fetched) {
+			fetchData();
+			setLoading(false)
+		}
+	}, [variedadesArray]);
 
-    // Limpieza del event listener al desmontar el componente
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, []);
+	useEffect(() => {
+		checkVariedades();
+		console.log("useEffect triggered", { variedadesArray });
+		fetchData();
+		setLoading(false);
+	}, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(`/api/vinos?variedades=${variedadesArray.join(',')}`);
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error('Fetch error:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [variedadesArray]);
-
-
-  if (loading) return <div>Loading...</div>;
-
-  return (
-    <main className="w-full px-1 pt-3 pb-1 bg-normalColor11 rounded-r-xl">
-      {JSON.stringify(data)}
-    </main>
-  );
+	if (loading) {
+		return (
+			<main className="w-full px-1 pt-3 pb-1 bg-normalColor11 rounded-r-xl">
+				Loading...
+			</main>
+		);
+	}
+	return (
+		<main className="w-full px-1 pt-3 pb-1 bg-normalColor11 rounded-r-xl">
+			{data && Object.keys(data).map((key) => (
+				<CarouselSection
+					key={key}
+					vinos={data[key]}
+					variedad={key}
+				/>
+			))}
+		</main>
+	);
 }
